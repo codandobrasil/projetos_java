@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Moeda</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .currency-converter {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CONVERSOR DE MOEDA CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="currency-converter">
+        <h2>Conversor de Moeda</h2>
+        <input type="number" id="amount" placeholder="Valor">
+        <select id="fromCurrency">
+            <option value="USD">Dólar Americano (USD)</option>
+            <option value="R$">Real (REL)</option>
+            <!-- Adicione mais opções de moeda -->
+        </select>
+        <select id="toCurrency">
+            <option value="USD">Dólar Americano (USD)</option>
+            <option value="R$">Real Brasileiro (R$)</option>
+            <!-- Adicione mais opções de moeda -->
+        </select>
+        <button onclick="convertCurrency()">Converter</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertCurrency() {
+            let amount = parseFloat(document.getElementById('amount').value);
+            let fromCurrency = document.getElementById('fromCurrency').value;
+            let toCurrency = document.getElementById('toCurrency').value;
+
+            // Adicionando taxas de conversão fictícias
+            const conversionRates = {
+                "USD": {
+                    "USD": 1, // 1 USD = 1 USD (não há conversão)
+                    "R$": 5.10 // 1 USD = 5.10 R$ (exemplo)
+                },
+                "REL": {
+                    "USD": 0.20, // 1 R$ = 0.20 USD (exemplo)
+                    "R$": 1
+                }
+            };
+
+            // Calcular o valor convertido
+            let conversionRate = conversionRates[fromCurrency][toCurrency];
+            let result = amount * conversionRate;
+
+            document.getElementById('result').textContent = `${amount} ${fromCurrency} equivalem a ${result.toFixed(2)} ${toCurrency}`;
+        }
+    </script>
+</body>
+</html>
