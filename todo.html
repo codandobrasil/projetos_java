@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        h1{
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .task-list {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 5px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1> TO-DO CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="task-list">
+        <h2>Tarefas Agendadas</h2>
+        <ul id="taskList">
+        </ul>
+        <div>
+            <input type="text" id="newTask" placeholder="Nova Tarefa">
+            <br><br><button onclick="addTask()">Adicionar Tarefa</button>
+        </div>
+    </div>
+
+    <script>
+        let taskList = document.getElementById('taskList');
+        let newTaskInput = document.getElementById('newTask');
+
+        function addTask() {
+            let taskText = newTaskInput.value;
+            if (taskText.trim() !== '') {
+                let taskItem = document.createElement('li');
+                taskItem.innerHTML = `
+                    <span>${taskText}</span>
+                    <button onclick="removeTask(this)">Remover</button>
+                `;
+                taskList.appendChild(taskItem);
+                newTaskInput.value = '';
+            }
+        }
+
+        function removeTask(button) {
+            let listItem = button.parentElement;
+            listItem.remove();
+        }
+    </script>
+</body>
+</html>
