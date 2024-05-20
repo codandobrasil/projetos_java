@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Formulário de Exemplo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        .form-container {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            text-align: center;
+        }
+        input[type="text"], input[type="email"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>FORMULÁRIO COM VALIDAÇÃO CODANDO BRASIL</h1>
+        <h2>www.codandobrasil.com.br</h2>
+        <form id="formularioContato" onsubmit="return validarFormulario()">
+            <div id="errorMessages" class="error"></div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="mensagem">Mensagem:</label><br>
+            <textarea id="mensagem" name="mensagem" rows="4" cols="50" required></textarea><br><br>
+
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+
+    <script>
+        function validarFormulario() {
+            var nome = document.getElementById("nome").value;
+            var email = document.getElementById("email").value;
+            var mensagem = document.getElementById("mensagem").value;
+            var errorMessages = document.getElementById("errorMessages");
+            errorMessages.innerHTML = "";
+
+            var valid = true;
+
+            if (nome === "" || email === "" || mensagem === "") {
+                errorMessages.innerHTML += "<p>Por favor, preencha todos os campos.</p>";
+                valid = false;
+            }
+
+            if (!validarEmail(email)) {
+                errorMessages.innerHTML += "<p>Email inválido. Por favor, insira um email válido contendo '@'.</p>";
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        function validarEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+    </script>
+</body>
+</html>
