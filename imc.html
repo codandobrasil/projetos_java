@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de IMC</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .bmi-calculator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CALCULADORA IMC - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="bmi-calculator">
+        <h2>Calculadora de IMC</h2>
+        <input type="number" id="weight" placeholder="Peso (em kg)">
+        <input type="number" id="height" placeholder="Altura (em metros)">
+        <button onclick="calculateBMI()">Calcular IMC</button>
+        <div id="result"></div>
+    </div>
+    <script>
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            if (!isNaN(weight) && !isNaN(height) && height > 0) {
+                const bmi = weight / (height * height);
+                document.getElementById('result').textContent = `Seu IMC é: ${bmi.toFixed(2)}`;
+            } else {
+                document.getElementById('result').textContent = 'Por favor, insira valores válidos.';
+            }
+        }
+    </script>
+</body>
+</html>
