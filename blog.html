@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Pessoal</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .blog {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        input[type="text"], textarea {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .post {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>BLOG PESSOAL - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="blog">
+        <h3>Blog Pessoal</h3>
+        <input type="text" id="title" placeholder="Título do Post">
+        <textarea id="content" placeholder="Conteúdo do Post"></textarea>
+        <button onclick="addPost()">Publicar</button><br><br>
+        <div id="posts"></div>
+    </div>
+    <script>
+        function addPost() {
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('content').value;
+            if (title.trim() !== '' && content.trim() !== '') {
+                const postsContainer = document.getElementById('posts');
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+                postDiv.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                `;
+                postsContainer.appendChild(postDiv);
+                document.getElementById('title').value = '';
+                document.getElementById('content').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
