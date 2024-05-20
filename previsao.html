@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão do Tempo</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .weather-app {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>METEOROLOGIA CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="weather-app">
+        <h2>Previsão do Tempo</h2>
+        <select id="location">
+            <option value="Porto Alegre">Porto Alegre</option>
+            <option value="São Paulo">São Paulo</option>
+            <option value="Rio de Janeiro">Rio de Janeiro</option>
+            <!-- Adicione mais opções de localização -->
+        </select><br><br>
+        <button onclick="getWeather()">Obter Previsão</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function getWeather() {
+            let location = document.getElementById('location').value;
+            let apiKey = "c65b482d7f080da15f81a00b1f81840a";
+            let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(location)}&units=metric&appid=${apiKey}`;
+
+            try {
+                let response = await fetch(apiUrl);
+                if (!response.ok) {
+                    throw new Error("Erro ao obter os dados da API");
+                }
+                let data = await response.json();
+                let weatherDescription = data.weather[0].description;
+                let temperature = data.main.temp;
+                document.getElementById('result').textContent = `Previsão do Tempo: ${weatherDescription}, ${temperature}°C`;
+            } catch (error) {
+                document.getElementById('result').textContent = `Erro ao obter a previsão do tempo: ${error.message}`;
+            }
+        }
+    </script>
+</body>
+</html>
