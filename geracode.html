@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .password-generator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>GERADOR DE SENHA - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="password-generator">
+        <h2>Gerador de Senhas</h2>
+        <input type="number" id="length" placeholder="Comprimento da Senha">
+       <br><br>
+        <button onclick="generatePassword()">Gerar Senha</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function generatePassword() {
+            let length = parseInt(document.getElementById('length').value);
+            if (isNaN(length) || length <= 0) {
+                alert('Por favor, insira um comprimento de senha válido.');
+                return;
+            }
+
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                let randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+
+            document.getElementById('result').textContent = `Senha: ${password}`;
+        }
+    </script>
+</body>
+</html>
