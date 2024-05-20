@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Interativo</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .quiz {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QUIZ INTERATIVO - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="quiz">
+        <h2>Quiz Interativo</h2>
+        <p>Qual é a capital da França?</p>
+        <ul>
+            <li><input type="radio" name="answer" value="Paris"> Paris</li>
+            <li><input type="radio" name="answer" value="Londres"> Londres</li>
+            <li><input type="radio" name="answer" value="Roma"> Roma</li>
+        </ul>
+        <button onclick="checkAnswer()">Verificar Resposta</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            let answer = document.querySelector('input[name="answer"]:checked').value;
+            // Implemente a lógica de verificação da resposta aqui
+            let correctAnswer = "Paris" /* Resposta correta */;
+            let resultMessage = answer === correctAnswer ? 'Resposta correta!' : 'Resposta incorreta!';
+            document.getElementById('result').textContent = resultMessage;
+        }
+    </script>
+</body>
+</html>
