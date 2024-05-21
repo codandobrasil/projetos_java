@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Citações</title>
+    <style>
+         h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .quote-generator {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #quote {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PENSAMENTO DO DIA - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="quote-generator">
+        <h2>PENSAMENTO DO DIA!</h2>
+        <button onclick="generateQuote()">Gerar Citação</button>
+        <div id="quote"></div>
+    </div>
+
+    <script>
+        const quotes = [
+            "A vida é o que acontece enquanto você está ocupado fazendo outros planos. - John Lennon",
+            "O sucesso é a capacidade de passar de um fracasso para outro sem perder o entusiasmo. - Winston Churchill",
+            "A única coisa que fica entre você e seu objetivo é a história que você continua contando a si mesmo sobre por que não pode alcançá-lo. - Jordan Belfort",
+            "A melhor vingança é um sucesso maciço. - Frank Sinatra",
+            "A única maneira de fazer um excelente trabalho é amar o que você faz. - Steve Jobs",
+            "O sonho acabou! Temos que ir na padaria! =)",
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            document.getElementById('quote').textContent = quote;
+        }
+    </script>
+</body>
+</html>
