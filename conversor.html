@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Unidades</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .unit-converter {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="number"] {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CONVERSOR DE UNIDADES - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="unit-converter">
+        <h2>Conversor de Unidades</h2>
+        <input type="number" id="value" placeholder="Digite o valor">
+        <select id="fromUnit">
+            <option value="cm">Centímetros (cm)</option>
+            <option value="m">Metros (m)</option>
+            <option value="km">Quilômetros (km)</option>
+        </select>
+        <select id="toUnit">
+            <option value="cm">Centímetros (cm)</option>
+            <option value="m">Metros (m)</option>
+            <option value="km">Quilômetros (km)</option>
+        </select><BR><BR>
+        <button onclick="convertUnits()">Converter</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertUnits() {
+            const value = parseFloat(document.getElementById('value').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            let result = 0;
+
+            if (fromUnit === 'cm' && toUnit === 'm') {
+                result = value / 100;
+            } else if (fromUnit === 'cm' && toUnit === 'km') {
+                result = value / 100000;
+            } else if (fromUnit === 'm' && toUnit === 'cm') {
+                result = value * 100;
+            } else if (fromUnit === 'm' && toUnit === 'km') {
+                result = value / 1000;
+            } else if (fromUnit === 'km' && toUnit === 'cm') {
+                result = value * 100000;
+            } else if (fromUnit === 'km' && toUnit === 'm') {
+                result = value * 1000;
+            } else {
+                result = value;
+            }
+
+            document.getElementById('result').textContent = `Resultado: ${result} ${toUnit}`;
+        }
+    </script>
+</body>
+</html>
