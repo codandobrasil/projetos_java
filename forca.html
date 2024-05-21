@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Forca</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .hangman-game {
+            width: 300px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #word {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #guess {
+            width: 60px;
+            padding: 5px;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #result {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        #attempts {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JOGO DA FORCA - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="hangman-game">
+        <h2>Jogo da Forca</h2>
+        <div id="word"></div>
+        <input type="text" id="guess" maxlength="1" placeholder="LETRA">
+        <button onclick="guessLetter()">Adivinhar</button>
+        <button onclick="startGame()">Reiniciar</button>
+        <div id="attempts"></div>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const words = ['javascript', 'programação', 'computador', 'desenvolvimento', 'html', 'css'];
+        let currentWord = '';
+        let hiddenWord = [];
+        let attempts = 6;
+
+        function startGame() {
+            currentWord = words[Math.floor(Math.random() * words.length)];
+            hiddenWord = new Array(currentWord.length).fill('_');
+            document.getElementById('word').textContent = hiddenWord.join(' ');
+            document.getElementById('result').textContent = '';
+            document.getElementById('guess').value = '';
+            attempts = 6;
+            document.getElementById('attempts').textContent = `Tentativas restantes: ${attempts}`;
+        }
+
+        function guessLetter() {
+            const guess = document.getElementById('guess').value.toLowerCase();
+            if (guess.length === 1 && /^[a-z]$/.test(guess)) {
+                let correctGuess = false;
+                if (currentWord.includes(guess)) {
+                    for (let i = 0; i < currentWord.length; i++) {
+                        if (currentWord[i] === guess) {
+                            hiddenWord[i] = guess;
+                            correctGuess = true;
+                        }
+                    }
+                    document.getElementById('word').textContent = hiddenWord.join(' ');
+                }
+                
+                if (!correctGuess) {
+                    attempts--;
+                    document.getElementById('attempts').textContent = `Tentativas restantes: ${attempts}`;
+                }
+
+                if (attempts === 0) {
+                    document.getElementById('result').textContent = 'Você perdeu! Tente novamente.';
+                    document.getElementById('word').textContent = `A palavra era: ${currentWord}`;
+                } else if (!hiddenWord.includes('_')) {
+                    document.getElementById('result').textContent = 'Parabéns! Você ganhou!';
+                }
+            } else {
+                document.getElementById('result').textContent = 'Por favor, insira uma letra válida.';
+            }
+            document.getElementById('guess').value = '';
+        }
+
+        startGame();
+    </script>
+</body>
+</html>
