@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Social Simples</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .social-app {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"], textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .post {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>REDE SOCIAL - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="social-app">
+        <h2>Rede Social Simples</h2>
+        <input type="text" id="username" placeholder="Nome de usuário">
+        <textarea id="postContent" placeholder="O que você está pensando?"></textarea><br><br>
+        <button onclick="addPost()">Postar</button>
+        <div id="posts"></div>
+    </div>
+
+    <script>
+        function addPost() {
+            const username = document.getElementById('username').value;
+            const postContent = document.getElementById('postContent').value;
+            if (username.trim() !== '' && postContent.trim() !== '') {
+                const postsContainer = document.getElementById('posts');
+                const postDiv = document.createElement('div');
+                postDiv.classList.add('post');
+                postDiv.innerHTML = `
+                    <strong>${username}:</strong>
+                    <p>${postContent}</p>
+                `;
+                postsContainer.appendChild(postDiv);
+                document.getElementById('username').value = '';
+                document.getElementById('postContent').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
