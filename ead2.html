@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Aprendizado Online</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .learning-platform {
+            width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"], textarea {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .course {
+            text-align: left;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>EAD - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <div class="learning-platform">
+        <h2>Plataforma de Aprendizado Online</h2>
+        <input type="text" id="courseTitle" placeholder="Título do Curso">
+        <textarea id="courseDescription" placeholder="Descrição do Curso"></textarea>
+        <button onclick="addCourse()">Criar Curso</button>
+        <div id="courses"></div>
+    </div>
+
+    <script>
+        function addCourse() {
+            const courseTitle = document.getElementById('courseTitle').value;
+            const courseDescription = document.getElementById('courseDescription').value;
+            if (courseTitle.trim() !== '' && courseDescription.trim() !== '') {
+                const coursesContainer = document.getElementById('courses');
+                const courseDiv = document.createElement('div');
+                courseDiv.classList.add('course');
+                courseDiv.innerHTML = `
+                    <h3>${courseTitle}</h3>
+                    <p>${courseDescription}</p>
+                `;
+                coursesContainer.appendChild(courseDiv);
+                document.getElementById('courseTitle').value = '';
+                document.getElementById('courseDescription').value = '';
+            }
+        }
+    </script>
+</body>
+</html>
