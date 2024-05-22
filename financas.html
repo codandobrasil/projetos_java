@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Finanças Pessoais</title>
+    <style>
+         h1 {
+            text-align: center;
+            color: red;
+        }
+        h2 {
+            text-align: center;
+            color: blue;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .finance-manager {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        input[type="text"], input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        #balance {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>FINANÇAS PESSOAIS - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    
+    <div class="finance-manager">
+        <h2>Gerenciamento de Finanças Pessoais</h2>
+        <input type="text" id="description" placeholder="Descrição da Transação">
+        <input type="number" id="amount" placeholder="Valor">
+        <select id="transactionType">
+            <option value="income">Receita</option>
+            <option value="expense">Despesa</option>
+        </select><br><br>
+        <button onclick="addTransaction()">Adicionar Transação</button>
+        <div id="balance">Saldo: R$ 0.00</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody id="transactionList"></tbody>
+        </table>
+    </div>
+
+    <script>
+        const transactions = [];
+        let balance = 0;
+
+        function addTransaction() {
+            const description = document.getElementById('description').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const transactionType = document.getElementById('transactionType').value;
+
+            if (description.trim() === '' || isNaN(amount) || amount <= 0) {
+                alert('Por favor, insira uma descrição e um valor válido.');
+                return;
+            }
+
+            const transaction = {
+                date: new Date().toLocaleDateString(),
+                description,
+                type: transactionType,
+                amount
+            };
+
+            transactions.push(transaction);
+            updateTransactionList();
+            calculateBalance();
+
+            document.getElementById('description').value = '';
+            document.getElementById('amount').value = '';
+        }
+
+        function updateTransactionList() {
+            const transactionList = document.getElementById('transactionList');
+            transactionList.innerHTML = '';
+
+            for (const transaction of transactions) {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.date}</td>
+                    <td>${transaction.description}</td>
+                    <td>${transaction.type === 'income' ? 'Receita' : 'Despesa'}</td>
+                    <td>R$ ${transaction.amount.toFixed(2)}</td>
+                `;
+                transactionList.appendChild(row);
+            }
+        }
+
+        function calculateBalance() {
+            balance = transactions.reduce((total, transaction) => {
+                return transaction.type === 'income'
+                    ? total + transaction.amount
+                    : total - transaction.amount;
+            }, 0);
+
+            document.getElementById('balance').textContent = `Saldo: R$ ${balance.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
