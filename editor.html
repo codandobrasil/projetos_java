@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de Código</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            color: red;
+        }
+        h2 {
+            color: blue;
+        }
+        .editor-container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button.clear-button {
+            background-color: #ff0000;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>EDITOR DE CÓDIGO - CODANDO BRASIL</h1>
+    <h2>www.codandobrasil.com.br</h2>
+    <h3>Editor de Código Online</h3>
+    <div class="editor-container">
+        <textarea id="code"></textarea>
+        <button onclick="runCode()">Executar</button>
+        <button class="clear-button" onclick="clearCode()">Limpar</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            mode: "javascript",
+            lineNumbers: true,
+        });
+
+        function runCode() {
+            var code = editor.getValue();
+            try {
+                var result = eval(code);
+                document.getElementById("output").innerHTML = result !== undefined ? result : '';
+            } catch (error) {
+                document.getElementById("output").innerHTML = "Erro: " + error.message;
+            }
+        }
+
+        function clearCode() {
+            editor.setValue('');
+            document.getElementById("output").innerHTML = '';
+        }
+    </script>
+</body>
+</html>
